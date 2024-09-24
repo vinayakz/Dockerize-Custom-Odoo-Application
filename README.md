@@ -59,8 +59,8 @@ This `docker-compose.yml` file defines a multi-container setup for running an Od
 
 This setup ensures that Odoo can run with custom modules and persistent data, connected to a PostgreSQL database.
 
-## Docker compose file end
---------------------------------------------------------------------------------------------------------------------------------------------
+## * Docker compose file end *
+
 
 # Dockerfile
 
