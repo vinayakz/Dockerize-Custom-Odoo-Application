@@ -1,0 +1,40 @@
+services:
+  web:
+    build: 
+      context: ./
+      dockerfile: dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8099:8069"
+      - "8070:8070"  # XML-RPC port
+      - "8072:8072"  # Longpolling port
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./simulab.config:/etc/odoo/odoo.conf
+      - ./custom_addons:/mnt/extra-addons  # Adjusted to match Odoo's expected path
+    environment:
+      - ODOO_RC=/etc/odoo/odoo.conf  # Point to your config file
+    networks:
+      - webnet
+
+  db:
+    image: postgres:12
+    ports:
+      - "6432:5432"
+    environment:
+      - POSTGRES_DB=simulab_local
+      - POSTGRES_PASSWORD=rootpgsql
+      - POSTGRES_USER=simuroot
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    networks:
+      - webnet
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+
+networks:
+  webnet:
