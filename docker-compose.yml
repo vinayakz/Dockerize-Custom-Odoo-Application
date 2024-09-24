@@ -11,7 +11,7 @@ services:
       - "8072:8072"  # Longpolling port
     volumes:
       - odoo-web-data:/var/lib/odoo
-      - ./simulab.config:/etc/odoo/odoo.conf
+      - ./odoo.config:/etc/odoo/odoo.conf
       - ./custom_addons:/mnt/extra-addons  # Adjusted to match Odoo's expected path
     environment:
       - ODOO_RC=/etc/odoo/odoo.conf  # Point to your config file
@@ -23,9 +23,9 @@ services:
     ports:
       - "6432:5432"
     environment:
-      - POSTGRES_DB=simulab_local
-      - POSTGRES_PASSWORD=rootpgsql
-      - POSTGRES_USER=simuroot
+      - POSTGRES_DB=your_db_name
+      - POSTGRES_PASSWORD=your_db_passwd
+      - POSTGRES_USER=your_db_user
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data
